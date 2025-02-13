@@ -1,0 +1,56 @@
+{
+  "ascii": [
+    "███████╗██████╗ ███████╗███████╗    ██████╗  █████╗ ███████╗██╗    ██╗ █████╗ ███╗   ██╗████████╗██╗  ██╗    ██╗   ██╗    ███████╗",
+    "██╔════╝██╔══██╗██╔════╝██╔════╝    ██╔══██╗██╔══██╗██╔════╝██║    ██║██╔══██╗████╗  ██║╚══██╔══╝██║  ██║    ██║   ██║    ██╔════╝",
+    "███████╗██████╔╝█████╗  █████╗      ██████╔╝███████║███████╗██║ █╗ ██║███████║██╔██╗ ██║   ██║   ███████║    ██║   ██║    ███████╗",
+    "╚════██║██╔══██╗██╔══╝  ██╔══╝      ██╔══██╗██╔══██║╚════██║██║███╗██║██╔══██║██║╚██╗██║   ██║   ██╔══██║    ╚██╗ ██╔╝    ╚════██║",
+    "███████║██║  ██║███████╗███████╗    ██║  ██║██║  ██║███████║╚███╔███╔╝██║  ██║██║ ╚████║   ██║   ██║  ██║     ╚████╔╝     ███████║",
+    "╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝    ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝ ╚══╝╚══╝ ╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝      ╚═══╝      ╚══════╝"   
+  ],
+  "title": "Sree Raswanth V S",
+  "username": "guest",
+  "hostname": "xander",
+  "password": "password",
+  "repoLink": "https://github.com/nasan016/webshell",
+  "social": {
+    "email": "raswanth28@gmail.com",
+    "github": "SreeHz",
+    "linkedin": "sree-raswanth-v-s-4a4725250"
+  },
+  "aboutGreeting": "Hello viewers!!. Welcome to my portfolio.",
+  "projects": [
+    [
+      "Finalyr Project",
+      "Enhanced IP Trace using Blockchain Integrity.",
+      "https://github.com/nasan016/gofer"
+    ],
+    [
+      "Intern Project",
+      "Project on Data Visualization.",
+      "https://github.com/nasan016/webshell"
+    ]
+  ],
+  "colors": {
+    "background": "black",
+    "foreground": "#F8DDE5",
+    "banner": "green",
+    "border": {
+      "visible": true,
+      "color": "green"
+    },
+    "prompt": {
+      "default": "#A5A7A7",
+      "user": "gold",
+      "host": "silver",
+      "input": "#FF7685"
+    },
+    "link": {
+      "text": "#B6AAEE",
+      "highlightColor": "#FFADE2",
+      "highlightText": "#0C0623"
+    },
+    "commands": {
+      "textColor": "#FD9BDB"
+    }
+  }
+}
