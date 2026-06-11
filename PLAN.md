@@ -54,15 +54,15 @@ Deployment works before any real code exists — it's never a question mark late
 
 ## Phase 1 — Terminal engine (1–2 days)
 
-- [ ] Layout: full-screen terminal, output area + prompt line, monospace font
-- [ ] Input handling: Enter executes, output appends, auto-scroll to bottom
-- [ ] Command registry: `{ name, description, run(args): output }` — each
+- [x] Layout: full-screen terminal, output area + prompt line, monospace font
+- [x] Input handling: Enter executes, output appends, auto-scroll to bottom
+- [x] Command registry: `{ name, description, run(args): output }` — each
       command a self-contained module (this is what makes `blog` trivial later)
-- [ ] `help` (auto-generated from registry), `clear`
-- [ ] Unknown command → "command not found, did you mean X? type `help`"
-- [ ] Command history with ↑ / ↓
-- [ ] Tab autocompletion for command names
-- [ ] Click anywhere focuses the input
+- [x] `help` (auto-generated from registry), `clear` (and Ctrl+L)
+- [x] Unknown command → "command not found, did you mean X? type `help`"
+- [x] Command history with ↑ / ↓
+- [x] Tab autocompletion for command names (incl. common-prefix completion)
+- [x] Click anywhere focuses the input
 
 ## Phase 2 — Portfolio content (1–2 days)
 

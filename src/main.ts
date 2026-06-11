@@ -1,10 +1,10 @@
 import "./styles/main.css";
+import { Terminal } from "./terminal";
 
-// Phase 0 placeholder — replaced by the real terminal engine in Phase 1.
-const terminal = document.querySelector<HTMLElement>("#terminal")!;
+const terminal = new Terminal(document.querySelector<HTMLElement>("#terminal")!);
 
-terminal.innerHTML = `
-  <div class="line"><span class="prompt">raswanth@portfolio:~$</span> echo "hello, world"</div>
-  <div class="line">hello, world</div>
-  <div class="line"><span class="prompt">raswanth@portfolio:~$</span> <span class="cursor"></span></div>
-`;
+terminal.ctx.print("Welcome to Raswanth's portfolio.");
+terminal.ctx.printHTML(
+  `Type <span class="accent">help</span> to see available commands.`,
+);
+terminal.ctx.print();
