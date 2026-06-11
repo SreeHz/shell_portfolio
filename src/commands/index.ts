@@ -11,6 +11,7 @@ import { projectsCommand } from "./projects";
 import { resume } from "./resume";
 import { skills } from "./skills";
 import { socials } from "./socials";
+import { theme } from "./theme";
 
 // Register new commands here — one module per command.
 const list: Command[] = [
@@ -24,6 +25,7 @@ const list: Command[] = [
   contact,
   socials,
   resume,
+  theme,
   banner,
   clear,
 ];

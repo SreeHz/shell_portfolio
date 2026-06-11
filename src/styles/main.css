@@ -6,13 +6,45 @@
   --error: #f85149;
 }
 
+:root[data-theme="light"] {
+  --bg: #ffffff;
+  --fg: #1f2328;
+  --muted: #59636e;
+  --accent: #1a7f37;
+  --error: #d1242f;
+}
+
+:root[data-theme="dracula"] {
+  --bg: #282a36;
+  --fg: #f8f8f2;
+  --muted: #6272a4;
+  --accent: #50fa7b;
+  --error: #ff5555;
+}
+
+:root[data-theme="gruvbox"] {
+  --bg: #282828;
+  --fg: #ebdbb2;
+  --muted: #a89984;
+  --accent: #b8bb26;
+  --error: #fb4934;
+}
+
+:root[data-theme="matrix"] {
+  --bg: #000000;
+  --fg: #00e63e;
+  --muted: #008f24;
+  --accent: #00ff41;
+  --error: #ff3333;
+}
+
 * {
   box-sizing: border-box;
 }
 
 html,
 body {
-  height: 100%;
+  min-height: 100%;
   margin: 0;
 }
 
@@ -31,7 +63,8 @@ body {
 }
 
 #terminal {
-  min-height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
   padding: 1.25rem;
   cursor: text;
 }
@@ -83,4 +116,48 @@ body {
 
 a {
   color: var(--accent);
+}
+
+a:focus-visible,
+.chips button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Quick-command chips — only on touch devices / narrow screens */
+.chips {
+  display: none;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.75rem 0;
+}
+
+.chips button {
+  font: inherit;
+  font-size: 0.85em;
+  color: var(--accent);
+  background: transparent;
+  border: 1px solid var(--muted);
+  border-radius: 999px;
+  padding: 0.2em 0.9em;
+  cursor: pointer;
+}
+
+.chips button:active {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+@media (pointer: coarse), (max-width: 700px) {
+  .chips {
+    display: flex;
+  }
+}
+
+/* Scale the ASCII banner down so it fits small screens */
+@media (max-width: 600px) {
+  .line.banner {
+    font-size: clamp(9px, 3vw, 16px);
+    line-height: 1.25;
+  }
 }

@@ -78,15 +78,15 @@ Deployment works before any real code exists — it's never a question mark late
 
 ## Phase 3 — Polish (1–2 days)
 
-- [ ] Typing animation for the banner
-- [ ] Themes: `theme <name>` (e.g. dracula, gruvbox, light), persisted in
-      localStorage via CSS variables
-- [ ] Mobile: virtual-keyboard quirks, responsive sizing, maybe tap-to-show
-      command buttons
-- [ ] SEO: title/meta/OpenGraph tags, og-image, plus a `<noscript>` plain-HTML
-      summary so search engines & no-JS visitors see real content
-- [ ] Favicon, 404 page
-- [ ] Accessibility pass: aria-live on output, visible focus, contrast
+- [x] Typing animation for the banner tagline (instant under reduced motion)
+- [x] Themes: `theme <name>` — dark, light, dracula, gruvbox, matrix —
+      persisted in localStorage via CSS variables
+- [x] Mobile: no auto-focus keyboard pop, scaled banner, dvh sizing,
+      tappable quick-command chips on touch/narrow screens
+- [x] SEO: title/meta/OpenGraph tags, og-image (real screenshot), JSON-LD
+      Person schema, expanded `<noscript>` summary
+- [x] Favicon (terminal `>_` SVG), 404 page styled as a shell error
+- [x] Accessibility: aria-live output, :focus-visible outlines, reduced-motion
 
 ## Phase 4 — Ship (~½ day)
 

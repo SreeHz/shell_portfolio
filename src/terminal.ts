@@ -35,6 +35,7 @@ export class Terminal {
   constructor(root: HTMLElement) {
     root.innerHTML = `
       <div class="output" role="log" aria-live="polite"></div>
+      <div class="chips" aria-label="quick commands"></div>
       <form class="input-line">
         <label class="prompt" for="cmd">${escapeHtml(PROMPT)}</label>
         <input
@@ -53,11 +54,21 @@ export class Terminal {
     this.ctx = {
       print: (text = "", className) => this.print(text, className),
       printHTML: (html) => this.printHTML(html),
+      type: (text, className) => this.typeLine(text, className),
       clear: () => {
         this.output.innerHTML = "";
       },
       commands,
     };
+
+    const chips = root.querySelector<HTMLElement>(".chips")!;
+    for (const name of ["help", "about", "projects", "skills", "resume", "contact"]) {
+      const chip = document.createElement("button");
+      chip.type = "button";
+      chip.textContent = name;
+      chip.addEventListener("click", () => this.exec(name));
+      chips.append(chip);
+    }
 
     root.querySelector("form")!.addEventListener("submit", (event) => {
       event.preventDefault();
@@ -83,12 +94,23 @@ export class Terminal {
       }
     });
 
-    // Click anywhere focuses the prompt — unless the user is selecting text.
-    document.addEventListener("click", () => {
+    // Click anywhere focuses the prompt — unless the user is selecting text
+    // or clicking a link/button.
+    document.addEventListener("click", (event) => {
+      if ((event.target as Element).closest?.("a, button")) return;
       if (getSelection()?.toString()) return;
       this.input.focus({ preventScroll: true });
     });
-    this.input.focus({ preventScroll: true });
+    // No auto-focus on touch devices — it would pop the keyboard on load.
+    if (!matchMedia("(pointer: coarse)").matches) {
+      this.input.focus({ preventScroll: true });
+    }
+  }
+
+  /** Run a command line programmatically (used by the quick-command chips). */
+  exec(line: string): void {
+    if (this.running) return;
+    void this.execute(line);
   }
 
   private print(text = "", className?: string): void {
@@ -105,6 +127,21 @@ export class Terminal {
     line.innerHTML = html;
     this.output.append(line);
     this.scrollToBottom();
+  }
+
+  private async typeLine(text: string, className?: string): Promise<void> {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      this.print(text, className);
+      return;
+    }
+    const line = document.createElement("div");
+    line.className = className ? `line ${className}` : "line";
+    this.output.append(line);
+    for (const char of text) {
+      line.textContent += char;
+      this.scrollToBottom();
+      await new Promise((resolve) => setTimeout(resolve, 14));
+    }
   }
 
   private echoPromptLine(line: string): void {

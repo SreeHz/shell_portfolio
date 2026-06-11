@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 — command not found</title>
+    <meta name="robots" content="noindex" />
+    <style>
+      body {
+        background: #0d1117;
+        color: #c9d1d9;
+        font-family: "Cascadia Code", "Fira Code", Menlo, Consolas, monospace;
+        font-size: 16px;
+        line-height: 1.6;
+        padding: 1.5rem;
+        margin: 0;
+      }
+      .prompt { color: #39d353; }
+      .error { color: #f85149; }
+      a { color: #39d353; }
+    </style>
+  </head>
+  <body>
+    <div><span class="prompt">raswanth@portfolio:~$</span> cd <span id="path"></span></div>
+    <div class="error">bash: cd: no such file or directory</div>
+    <br />
+    <div>This page doesn't exist in this shell.</div>
+    <br />
+    <div>
+      <span class="prompt">raswanth@portfolio:~$</span>
+      <a href="/shell_portfolio/">cd ~ — back to the terminal</a>
+    </div>
+    <script>
+      document.getElementById("path").textContent = location.pathname;
+    </script>
+  </body>
+</html>

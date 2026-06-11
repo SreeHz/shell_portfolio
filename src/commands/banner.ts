@@ -13,10 +13,10 @@ const ART = [
 export const banner: Command = {
   name: "banner",
   description: "show the welcome banner",
-  run(_args, ctx) {
+  async run(_args, ctx) {
     for (const line of ART) ctx.print(line, "banner accent");
     ctx.print();
-    ctx.print(`${profile.role} · ${profile.location}`, "muted");
+    await ctx.type(`${profile.role} · ${profile.location}`, "muted");
     ctx.print();
     ctx.printHTML(
       `Type <span class="accent">help</span> to see what you can do here.`,
