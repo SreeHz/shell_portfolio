@@ -45,10 +45,10 @@ shell_portfolio/
 
 ## Phase 0 — Foundation (~½ day)
 
-- [ ] Create GitHub repo, `git init`, first commit
-- [ ] Scaffold Vite + TypeScript project
-- [ ] GitHub Actions workflow: build + deploy to GitHub Pages on push to `main`
-- [ ] Verify "hello world" is live at `https://<user>.github.io/<repo>/`
+- [x] Create GitHub repo, `git init`, first commit — https://github.com/SreeHz/shell_portfolio
+- [x] Scaffold Vite + TypeScript project
+- [x] GitHub Actions workflow: build + deploy to GitHub Pages on push to `main`
+- [x] Verify "hello world" is live at https://sreehz.github.io/shell_portfolio/
 
 Deployment works before any real code exists — it's never a question mark later.
 
