@@ -66,12 +66,15 @@ Deployment works before any real code exists — it's never a question mark late
 
 ## Phase 2 — Portfolio content (1–2 days)
 
-- [ ] `content/profile.json` + `content/projects.json` data files
-- [ ] Commands: `about`, `projects` (+ `projects <name>` for detail), `skills`,
+- [x] `content/profile.json` + `content/projects.json` data files
+- [x] Commands: `about`, `projects` (+ `projects <name>` for detail), `skills`,
       `experience`, `education`, `contact`, `socials`
-- [ ] `resume` — opens/downloads PDF from the repo
-- [ ] ASCII-art welcome banner + "type `help` to get started" hint
-- [ ] Links in output are clickable
+- [x] `resume` — opens PDF from the repo (graceful message until
+      `public/resume.pdf` is added)
+- [x] ASCII-art welcome banner + "type `help` to get started" hint
+- [x] Links in output are clickable (new tab, noopener)
+- [ ] **USER TODO:** replace the `(EDIT)` placeholders in `content/*.json`
+      and add `public/resume.pdf`
 
 ## Phase 3 — Polish (1–2 days)
 

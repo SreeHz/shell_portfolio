@@ -41,6 +41,12 @@ body {
   word-break: break-word;
 }
 
+.line.banner {
+  white-space: pre;
+  word-break: normal;
+  overflow: hidden;
+}
+
 .prompt {
   color: var(--accent);
 }

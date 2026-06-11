@@ -1,15 +1,8 @@
 import { commands } from "./commands";
 import type { TerminalContext } from "./types";
+import { escapeHtml } from "./utils";
 
 const PROMPT = "raswanth@portfolio:~$";
-
-export function escapeHtml(text: string): string {
-  return text
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
 
 function levenshtein(a: string, b: string): number {
   const rows = a.length + 1;

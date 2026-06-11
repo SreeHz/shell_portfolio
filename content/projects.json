@@ -1,0 +1,53 @@
+[
+  {
+    "name": "shell-portfolio",
+    "title": "Shell Portfolio",
+    "description": "This site — a terminal-style portfolio built from scratch with TypeScript and Vite, deployed free on GitHub Pages.",
+    "tech": ["TypeScript", "Vite", "GitHub Actions"],
+    "repo": "https://github.com/SreeHz/shell_portfolio",
+    "live": "https://sreehz.github.io/shell_portfolio/"
+  },
+  {
+    "name": "blockchain-auth-api",
+    "title": "Blockchain Auth API",
+    "description": "REST API exploring blockchain-based authentication flows. (EDIT: describe what it does)",
+    "tech": ["JavaScript", "Node.js"],
+    "repo": "https://github.com/SreeHz/blockchain-auth-api"
+  },
+  {
+    "name": "blockchain-login",
+    "title": "Blockchain Login Prototype",
+    "description": "Prototype login system backed by blockchain identity. (EDIT)",
+    "tech": ["JavaScript"],
+    "repo": "https://github.com/SreeHz/Blockchain_Login_Prototype"
+  },
+  {
+    "name": "xander-security",
+    "title": "Xander Security",
+    "description": "A total security service for servers with an employee activity monitoring application.",
+    "tech": ["EDIT: tech used"],
+    "repo": "https://github.com/SreeHz/xander-security"
+  },
+  {
+    "name": "cmrl-admin",
+    "title": "CMRL Admin Portal",
+    "description": "Admin portal built during my internship. (EDIT)",
+    "tech": ["JavaScript"],
+    "repo": "https://github.com/SreeHz/cmrl-admin-intern"
+  },
+  {
+    "name": "expense-tracker",
+    "title": "Expense Tracker",
+    "description": "Java application for tracking personal expenses. (EDIT)",
+    "tech": ["Java"],
+    "repo": "https://github.com/SreeHz/Expense-Tracker"
+  },
+  {
+    "name": "login-prototype",
+    "title": "Frontend Login Prototype",
+    "description": "Login/signup UI prototype deployed on Vercel. (EDIT)",
+    "tech": ["JavaScript"],
+    "repo": "https://github.com/SreeHz/Frontend-Login-Prototype",
+    "live": "https://frontend-login-prototype.vercel.app"
+  }
+]

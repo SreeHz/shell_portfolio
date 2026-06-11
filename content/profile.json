@@ -1,0 +1,62 @@
+{
+  "name": "Raswanth",
+  "role": "Software Developer",
+  "location": "India (EDIT: your city)",
+  "email": "raswanth28@gmail.com",
+  "githubUser": "SreeHz",
+  "about": [
+    "Hi, I'm Raswanth 👋",
+    "",
+    "I'm a software developer who likes building things end to end —",
+    "from terminal UIs like this one to APIs, web apps, and mobile apps.",
+    "Lately I've been exploring blockchain-based authentication and",
+    "security tooling.",
+    "",
+    "This site is a real terminal emulator I built from scratch with",
+    "TypeScript — no frameworks, no terminal libraries.",
+    "",
+    "(EDIT content/profile.json to make this section truly yours.)"
+  ],
+  "skills": [
+    {
+      "category": "Languages",
+      "items": ["TypeScript", "JavaScript", "Java", "Python", "C++"]
+    },
+    {
+      "category": "Web",
+      "items": ["Node.js", "Express", "React", "MongoDB", "Vite"]
+    },
+    {
+      "category": "Interests",
+      "items": ["Blockchain", "Security", "Android"]
+    },
+    {
+      "category": "Tools",
+      "items": ["Git & GitHub", "Linux", "GitHub Actions"]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Software Development Intern",
+      "org": "CMRL (EDIT: organisation name)",
+      "period": "2025 (EDIT: dates)",
+      "points": [
+        "Built an admin portal as an intern project (cmrl-admin-intern on GitHub).",
+        "EDIT: add 2–3 bullets about what you did and the impact."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "B.E. / B.Tech in Computer Science (EDIT)",
+      "school": "Your college name (EDIT)",
+      "period": "20XX – 20XX (EDIT)",
+      "details": []
+    }
+  ],
+  "socials": [
+    { "label": "github", "url": "https://github.com/SreeHz" },
+    { "label": "email", "url": "mailto:raswanth28@gmail.com" },
+    { "label": "linkedin", "url": "https://www.linkedin.com/in/EDIT-ME" }
+  ]
+}

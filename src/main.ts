@@ -1,10 +1,9 @@
 import "./styles/main.css";
 import { Terminal } from "./terminal";
+import { commands } from "./commands";
 
-const terminal = new Terminal(document.querySelector<HTMLElement>("#terminal")!);
-
-terminal.ctx.print("Welcome to Raswanth's portfolio.");
-terminal.ctx.printHTML(
-  `Type <span class="accent">help</span> to see available commands.`,
+const terminal = new Terminal(
+  document.querySelector<HTMLElement>("#terminal")!,
 );
-terminal.ctx.print();
+
+void commands.get("banner")!.run([], terminal.ctx);
