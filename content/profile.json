@@ -8,53 +8,51 @@
   "about": [
     "Hi, I'm Sree Raswanth V S 👋",
     "",
-    "I'm a software developer from Chennai, India, currently looking for a",
-    "software developer role. Most recently I worked at Amazon as a Quality",
-    "Service Associate on Alexa Tech Support — owning feature testing across",
-    "50+ Alexa devices and earning a Wall of Fame mention for delivering",
-    "100% production execution with zero missed defects.",
+    "I'm from Chennai, India, currently looking for a Software Developer role💻",
+    "Most recently I worked at Amazon📦 as a Quality Service Associate ",
+    "on Alexa Tech Support Team owning two major feature testing across",
+    "50+ Alexa devices and earning a Wall of Fame🌟 by Amazon mentioned for",
+    "delivering 100% production execution with zero missed defects.",
     "",
-    "I'm also a network-administration enthusiast, and I'm currently",
-    "learning cloud system design and artificial intelligence.",
+    "I'm also a network-administration🔐 enthusiast, and I'm currently",
+    "learning cloud system design☁️ and artificial intelligence🤖.",
     "",
-    "Outside work, I'm passionate about device freedom: you paid for your",
-    "phone, so you deserve its full potential. I teach people how to unlock",
+    "Outside work, I'm passionate about device freedom: you paid💵 for your",
+    "phone📱, so you deserve its full potential. I teach people how to unlock",
     "bootloaders, remove bloatware, install custom ROMs, and tweak system",
-    "performance — and exactly what the trade-offs are when they do.",
-    "",
-    "This site is a real terminal emulator built from scratch in TypeScript",
-    "— no frameworks, no terminal libraries. Take a look around."
+    "performance📈 — and exactly what the trade-offs are when they do.",
+    ""
   ],
   "skills": [
     {
-      "category": "Languages",
+      "category": "Languages🗣️",
       "items": ["Java", "Python", "C", "C++", "SQL"]
     },
     {
-      "category": "Web",
+      "category": "Web🕸️",
       "items": ["Node.js", "Express", "React", "PostgreSQL", "MongoDB"]
     },
     {
-      "category": "Mobile",
+      "category": "Mobile📳",
       "items": ["Flutter", "Android (custom ROMs & system tweaking)"]
     },
     {
-      "category": "Core",
+      "category": "Core🧑‍💻",
       "items": ["OOPs", "DSA", "Networking"]
     },
     {
-      "category": "Learning",
+      "category": "Learning📚",
       "items": ["Cloud System Design", "Artificial Intelligence"]
     },
     {
-      "category": "OS & Tools",
+      "category": "OS📀 & Tools🛠️",
       "items": ["Linux", "Windows", "Git & GitHub"]
     }
   ],
   "experience": [
     {
       "role": "Quality Service Associate — Alexa Tech Support",
-      "org": "Amazon",
+      "org": "Amazon📦",
       "period": "Oct 2025 – May 2026",
       "points": [
         "Owned testing for two major upcoming Alexa features, across 50+ Alexa devices.",
@@ -65,7 +63,7 @@
     },
     {
       "role": "Data Analytics Intern",
-      "org": "Chennai Metro Rail Limited (CMRL)",
+      "org": "Chennai Metro Rail Limited (CMRL)🚅",
       "period": "internship",
       "points": [
         "Built a data-analytics platform over real-time passenger-flow data from metro stations.",
@@ -103,11 +101,17 @@
     "Cisco Networking Academy — Cybersecurity Essentials"
   ],
   "socials": [
-    { "label": "github", "url": "https://github.com/SreeHz" },
+    { 
+      "label": "github", 
+      "url": "https://github.com/SreeHz" 
+    },
     {
       "label": "linkedin",
       "url": "https://www.linkedin.com/in/sree-raswanth-v-s-4a4725250/"
     },
-    { "label": "email", "url": "mailto:raswanth28@proton.me" }
+    { 
+      "label": "email", 
+      "url": "mailto:raswanth28@proton.me" 
+    }
   ]
 }

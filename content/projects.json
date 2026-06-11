@@ -1,9 +1,10 @@
 [
   {
-    "name": "ip-trace",
+    "name": "ip-trace-system-Backend",
     "title": "Enhanced IP Trace System Using Blockchain Integrity",
     "description": "Final-year project: tamper-proof IP tracing with immutable blockchain logs and cryptographic key-based authentication.",
     "tech": ["React", "Node.js", "MongoDB", "Ether.js", "WebRTC"],
+    "repo": "https://github.com/SreeHz/blockchain-auth-api",
     "details": [
       "Ensures data integrity through immutable logs",
       "Implements cryptographic key-based authentication",
@@ -13,12 +14,11 @@
     ]
   },
   {
-    "name": "shell-portfolio",
-    "title": "Shell Portfolio",
-    "description": "This site — a terminal-style portfolio built from scratch with TypeScript and Vite, deployed free on GitHub Pages.",
-    "tech": ["TypeScript", "Vite", "GitHub Actions"],
-    "repo": "https://github.com/SreeHz/shell_portfolio",
-    "live": "https://sreehz.github.io/shell_portfolio/"
+    "name": "ip-trace-system-Frontend",
+    "title": "Blockchain Login Prototype",
+    "description": "Prototype login system backed by blockchain identity.",
+    "tech": ["JavaScript"],
+    "repo": "https://github.com/SreeHz/Blockchain_Login_Prototype"
   },
   {
     "name": "cmrl-analytics",
@@ -28,39 +28,17 @@
     "repo": "https://github.com/SreeHz/cmrl-admin-intern"
   },
   {
-    "name": "blockchain-auth-api",
-    "title": "Blockchain Auth API",
-    "description": "REST API exploring blockchain-based authentication with cryptographic keys.",
-    "tech": ["JavaScript", "Node.js"],
-    "repo": "https://github.com/SreeHz/blockchain-auth-api"
-  },
-  {
-    "name": "blockchain-login",
-    "title": "Blockchain Login Prototype",
-    "description": "Prototype login system backed by blockchain identity.",
-    "tech": ["JavaScript"],
-    "repo": "https://github.com/SreeHz/Blockchain_Login_Prototype"
+    "name": "expense-tracker",
+    "title": "Expense Tracker",
+    "description": "Java application for tracking personal expenses that saves on a SQL Server with ability to calculate the summary for custom date ranges",
+    "tech": ["Java"],
+    "repo": "https://github.com/SreeHz/Expense-Tracker"
   },
   {
     "name": "xander-security",
     "title": "Xander Security",
     "description": "A total security service for servers with an employee activity monitoring application.",
-    "tech": [],
+    "tech": ["My Dream Project"],
     "repo": "https://github.com/SreeHz/xander-security"
-  },
-  {
-    "name": "expense-tracker",
-    "title": "Expense Tracker",
-    "description": "Java application for tracking personal expenses.",
-    "tech": ["Java"],
-    "repo": "https://github.com/SreeHz/Expense-Tracker"
-  },
-  {
-    "name": "login-prototype",
-    "title": "Frontend Login Prototype",
-    "description": "Login/signup UI prototype deployed on Vercel.",
-    "tech": ["JavaScript"],
-    "repo": "https://github.com/SreeHz/Frontend-Login-Prototype",
-    "live": "https://frontend-login-prototype.vercel.app"
   }
 ]
