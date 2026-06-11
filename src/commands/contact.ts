@@ -11,6 +11,9 @@ export const contact: Command = {
       `  <span class="accent">email </span> ${link(`mailto:${profile.email}`, profile.email)}`,
     );
     ctx.printHTML(
+      `  <span class="accent">phone </span> ${link(`tel:${profile.phone}`, profile.phone)}`,
+    );
+    ctx.printHTML(
       `  <span class="accent">github</span> ${link(`https://github.com/${profile.githubUser}`, `github.com/${profile.githubUser}`)}`,
     );
     ctx.print();

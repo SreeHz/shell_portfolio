@@ -3,3 +3,4 @@ dist/
 .claude/settings.local.json
 *.local
 .DS_Store
+about_me/

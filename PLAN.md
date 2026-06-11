@@ -73,8 +73,8 @@ Deployment works before any real code exists — it's never a question mark late
       `public/resume.pdf` is added)
 - [x] ASCII-art welcome banner + "type `help` to get started" hint
 - [x] Links in output are clickable (new tab, noopener)
-- [ ] **USER TODO:** replace the `(EDIT)` placeholders in `content/*.json`
-      and add `public/resume.pdf`
+- [x] Real content filled in from resume + summary (Amazon, CMRL, Sri Sairam,
+      awards & certifications); `public/resume.pdf` added; `awards` command
 
 ## Phase 3 — Polish (1–2 days)
 

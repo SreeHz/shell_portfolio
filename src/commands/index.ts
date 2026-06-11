@@ -1,5 +1,6 @@
 import type { Command } from "../types";
 import { about } from "./about";
+import { awards } from "./awards";
 import { banner } from "./banner";
 import { clear } from "./clear";
 import { contact } from "./contact";
@@ -19,6 +20,7 @@ const list: Command[] = [
   skills,
   experience,
   education,
+  awards,
   contact,
   socials,
   resume,

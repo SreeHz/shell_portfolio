@@ -30,11 +30,13 @@ export interface Profile {
   role: string;
   location: string;
   email: string;
+  phone: string;
   githubUser: string;
   about: string[];
   skills: SkillGroup[];
   experience: Experience[];
   education: Education[];
+  awards: string[];
   socials: Social[];
 }
 
@@ -43,8 +45,9 @@ export interface Project {
   title: string;
   description: string;
   tech: string[];
-  repo: string;
+  repo?: string;
   live?: string;
+  details?: string[];
 }
 
 export const profile: Profile = profileJson;

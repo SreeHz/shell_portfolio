@@ -1,5 +1,18 @@
 [
   {
+    "name": "ip-trace",
+    "title": "Enhanced IP Trace System Using Blockchain Integrity",
+    "description": "Final-year project: tamper-proof IP tracing with immutable blockchain logs and cryptographic key-based authentication.",
+    "tech": ["React", "Node.js", "MongoDB", "Ether.js", "WebRTC"],
+    "details": [
+      "Ensures data integrity through immutable logs",
+      "Implements cryptographic key-based authentication",
+      "Integrates WebRTC to expose masked IPs for accountability",
+      "Tracks user activity securely using blockchain",
+      "Admin monitoring for suspicious-activity detection"
+    ]
+  },
+  {
     "name": "shell-portfolio",
     "title": "Shell Portfolio",
     "description": "This site — a terminal-style portfolio built from scratch with TypeScript and Vite, deployed free on GitHub Pages.",
@@ -8,16 +21,23 @@
     "live": "https://sreehz.github.io/shell_portfolio/"
   },
   {
+    "name": "cmrl-analytics",
+    "title": "CMRL Data Analytics Portal",
+    "description": "Internship project at Chennai Metro Rail Limited — real-time passenger-flow and ticketing analytics across metro stations.",
+    "tech": ["React", "Express", "PostgreSQL", "Django", "Leaflet", "Bootstrap"],
+    "repo": "https://github.com/SreeHz/cmrl-admin-intern"
+  },
+  {
     "name": "blockchain-auth-api",
     "title": "Blockchain Auth API",
-    "description": "REST API exploring blockchain-based authentication flows. (EDIT: describe what it does)",
+    "description": "REST API exploring blockchain-based authentication with cryptographic keys.",
     "tech": ["JavaScript", "Node.js"],
     "repo": "https://github.com/SreeHz/blockchain-auth-api"
   },
   {
     "name": "blockchain-login",
     "title": "Blockchain Login Prototype",
-    "description": "Prototype login system backed by blockchain identity. (EDIT)",
+    "description": "Prototype login system backed by blockchain identity.",
     "tech": ["JavaScript"],
     "repo": "https://github.com/SreeHz/Blockchain_Login_Prototype"
   },
@@ -25,27 +45,20 @@
     "name": "xander-security",
     "title": "Xander Security",
     "description": "A total security service for servers with an employee activity monitoring application.",
-    "tech": ["EDIT: tech used"],
+    "tech": [],
     "repo": "https://github.com/SreeHz/xander-security"
-  },
-  {
-    "name": "cmrl-admin",
-    "title": "CMRL Admin Portal",
-    "description": "Admin portal built during my internship. (EDIT)",
-    "tech": ["JavaScript"],
-    "repo": "https://github.com/SreeHz/cmrl-admin-intern"
   },
   {
     "name": "expense-tracker",
     "title": "Expense Tracker",
-    "description": "Java application for tracking personal expenses. (EDIT)",
+    "description": "Java application for tracking personal expenses.",
     "tech": ["Java"],
     "repo": "https://github.com/SreeHz/Expense-Tracker"
   },
   {
     "name": "login-prototype",
     "title": "Frontend Login Prototype",
-    "description": "Login/signup UI prototype deployed on Vercel. (EDIT)",
+    "description": "Login/signup UI prototype deployed on Vercel.",
     "tech": ["JavaScript"],
     "repo": "https://github.com/SreeHz/Frontend-Login-Prototype",
     "live": "https://frontend-login-prototype.vercel.app"

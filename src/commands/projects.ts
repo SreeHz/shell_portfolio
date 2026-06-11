@@ -46,7 +46,13 @@ function showDetail(query: string, ctx: Parameters<Command["run"]>[1]): void {
   ctx.print();
   ctx.print(`  ${project.description}`);
   ctx.print();
-  ctx.print(`  tech:  ${project.tech.join(", ")}`, "muted");
-  ctx.printHTML(`  repo:  ${link(project.repo)}`);
+  if (project.details) {
+    for (const detail of project.details) ctx.print(`  · ${detail}`);
+    ctx.print();
+  }
+  if (project.tech.length > 0) {
+    ctx.print(`  tech:  ${project.tech.join(", ")}`, "muted");
+  }
+  if (project.repo) ctx.printHTML(`  repo:  ${link(project.repo)}`);
   if (project.live) ctx.printHTML(`  live:  ${link(project.live)}`);
 }
