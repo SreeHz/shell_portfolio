@@ -90,10 +90,11 @@ Deployment works before any real code exists — it's never a question mark late
 
 ## Phase 4 — Ship (~½ day)
 
-- [ ] Lighthouse audit (perf / a11y / SEO)
-- [ ] Cross-browser + real-phone check
-- [ ] README with demo GIF
-- [ ] Optional: GoatCounter analytics, free subdomain (is-a.dev / js.org)
+- [x] Lighthouse audit (perf / a11y / SEO) — 100/100/100/100 after adding
+      `public/robots.txt`
+- [x] Browser check: Chrome desktop + mobile-width viewport (chips, scaled
+      banner, no console errors). Still manual: Firefox, Safari, real phone.
+- [x] README with demo GIF (`docs/demo.gif`, recorded in-browser)
 
 ## Phase 5 — Blog (future)
 
