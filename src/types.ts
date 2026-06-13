@@ -7,6 +7,8 @@ export interface TerminalContext {
   type(text: string, className?: string): Promise<void>;
   clear(): void;
   commands: ReadonlyMap<string, Command>;
+  /** Trigger the GRUB rescue chaos mode. */
+  activateChaosMode(): void;
 }
 
 export interface Command {
@@ -14,4 +16,6 @@ export interface Command {
   description: string;
   usage?: string;
   run(args: string[], ctx: TerminalContext): void | Promise<void>;
+  /** Return candidate completions for the current partial argument. */
+  complete?(partial: string): string[];
 }

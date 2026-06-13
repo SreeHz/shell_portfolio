@@ -6,24 +6,40 @@ export const projectsCommand: Command = {
   name: "projects",
   description: "things I've built — try: projects <name>",
   usage: "projects [name]",
+  complete(partial) {
+    return projects
+      .map((p) => p.name)
+      .filter((name) => name.startsWith(partial.toLowerCase()));
+  },
   run(args, ctx) {
     ctx.print();
     if (args.length > 0) {
       showDetail(args.join(" ").toLowerCase(), ctx);
-    } else {
-      const width = Math.max(...projects.map((p) => p.name.length));
-      for (const project of projects) {
-        ctx.printHTML(
-          `  <span class="accent">${escapeHtml(project.name.padEnd(width + 3))}</span>` +
-            `<span class="muted">${escapeHtml(project.description)}</span>`,
-        );
-      }
-      ctx.print();
-      ctx.printHTML(
-        `<span class="muted">run</span> <span class="accent">projects &lt;name&gt;</span> ` +
-          `<span class="muted">for details, e.g.</span> <span class="accent">projects ${escapeHtml(projects[0].name)}</span>`,
-      );
+      return;
     }
+
+    const rows = projects
+      .map(
+        (p) =>
+          `<tr>
+            <td><span class="accent">${escapeHtml(p.name)}</span></td>
+            <td class="muted">${escapeHtml(p.tech.join(", "))}</td>
+            <td>${escapeHtml(p.description)}</td>
+          </tr>`,
+      )
+      .join("");
+
+    ctx.printHTML(
+      `<table class="cmd-table">
+        <thead><tr><th>Project</th><th>Tech</th><th>Description</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>`,
+    );
+    ctx.print();
+    ctx.printHTML(
+      `<span class="muted">run</span> <span class="accent">projects &lt;name&gt;</span> ` +
+        `<span class="muted">for details, e.g.</span> <span class="accent">projects ${escapeHtml(projects[0].name)}</span>`,
+    );
     ctx.print();
   },
 };
@@ -50,9 +66,7 @@ function showDetail(query: string, ctx: Parameters<Command["run"]>[1]): void {
     for (const detail of project.details) ctx.print(`  · ${detail}`);
     ctx.print();
   }
-  if (project.tech.length > 0) {
-    ctx.print(`  tech:  ${project.tech.join(", ")}`, "muted");
-  }
+  if (project.tech.length > 0) ctx.print(`  tech:  ${project.tech.join(", ")}`, "muted");
   if (project.repo) ctx.printHTML(`  repo:  ${link(project.repo)}`);
   if (project.live) ctx.printHTML(`  live:  ${link(project.live)}`);
 }

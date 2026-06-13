@@ -1,8 +1,15 @@
 import { commands } from "./commands";
 import type { TerminalContext } from "./types";
 import { escapeHtml } from "./utils";
+import { CHAOS_RESPONSES } from "./commands/jokes";
 
-const PROMPT = "raswanth@portfolio:~$";
+const DEFAULT_PROMPT = "raswanth@portfolio:~$";
+const GRUB_PROMPT    = "grub rescue>";
+let   termSeq        = 0;
+
+function pick<T>(arr: T[]): T {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
 
 function levenshtein(a: string, b: string): number {
   const rows = a.length + 1;
@@ -24,22 +31,30 @@ function levenshtein(a: string, b: string): number {
 
 export class Terminal {
   readonly ctx: TerminalContext;
+  /** Called once when chaos mode activates — wire up desktop effects here. */
+  onChaosMode?: () => void;
 
+  private root!: HTMLElement;
   private output!: HTMLElement;
   private input!: HTMLInputElement;
+  private promptLabel!: HTMLLabelElement;
   private history: string[] = [];
-  private historyIndex = 0; // history.length means "not navigating"
+  private historyIndex = 0;
   private draft = "";
   private running = false;
+  private chaosMode = false;
+  private currentPrompt = DEFAULT_PROMPT;
 
   constructor(root: HTMLElement) {
+    this.root = root;
+    const uid = `cmd-${++termSeq}`;
     root.innerHTML = `
       <div class="output" role="log" aria-live="polite"></div>
       <div class="chips" aria-label="quick commands"></div>
       <form class="input-line">
-        <label class="prompt" for="cmd">${escapeHtml(PROMPT)}</label>
+        <label class="prompt" for="${uid}">${escapeHtml(DEFAULT_PROMPT)}</label>
         <input
-          id="cmd"
+          id="${uid}"
           autocomplete="off"
           autocapitalize="off"
           autocorrect="off"
@@ -48,17 +63,17 @@ export class Terminal {
         />
       </form>
     `;
-    this.output = root.querySelector(".output")!;
-    this.input = root.querySelector("input")!;
+    this.output      = root.querySelector(".output")!;
+    this.input       = root.querySelector("input")!;
+    this.promptLabel = root.querySelector("label")!;
 
     this.ctx = {
-      print: (text = "", className) => this.print(text, className),
+      print:    (text = "", className) => this.print(text, className),
       printHTML: (html) => this.printHTML(html),
-      type: (text, className) => this.typeLine(text, className),
-      clear: () => {
-        this.output.innerHTML = "";
-      },
+      type:     (text, className)      => this.typeLine(text, className),
+      clear:    () => { this.output.innerHTML = ""; },
       commands,
+      activateChaosMode: () => this.activateChaosMode(),
     };
 
     const chips = root.querySelector<HTMLElement>(".chips")!;
@@ -87,30 +102,52 @@ export class Terminal {
         this.navigateHistory(1);
       } else if (event.key === "Tab") {
         event.preventDefault();
-        this.autocomplete();
+        if (!this.chaosMode) this.autocomplete();
       } else if (event.key === "l" && event.ctrlKey) {
         event.preventDefault();
         this.ctx.clear();
+      } else if (event.key === "c" && event.ctrlKey) {
+        event.preventDefault();
+        this.echoPromptLine(this.input.value + "^C");
+        this.input.value = "";
+        this.running = false;
+      } else if (event.key === "u" && event.ctrlKey) {
+        event.preventDefault();
+        this.input.value = "";
       }
     });
 
-    // Click anywhere focuses the prompt — unless the user is selecting text
-    // or clicking a link/button.
-    document.addEventListener("click", (event) => {
+    root.addEventListener("click", (event) => {
       if ((event.target as Element).closest?.("a, button")) return;
       if (getSelection()?.toString()) return;
       this.input.focus({ preventScroll: true });
     });
-    // No auto-focus on touch devices — it would pop the keyboard on load.
     if (!matchMedia("(pointer: coarse)").matches) {
       this.input.focus({ preventScroll: true });
     }
   }
 
-  /** Run a command line programmatically (used by the quick-command chips). */
   exec(line: string): void {
     if (this.running) return;
     void this.execute(line);
+  }
+
+  private activateChaosMode(): void {
+    this.chaosMode = true;
+    this.currentPrompt = GRUB_PROMPT;
+    this.promptLabel.textContent = GRUB_PROMPT;
+    this.promptLabel.classList.add("grub-prompt");
+    document.documentElement.dataset.theme = "grub";
+
+    const titleEl = document.querySelector<HTMLElement>(".titlebar-title");
+    if (titleEl) {
+      titleEl.textContent = "GRUB Rescue Mode  —  Kernel panic: VFS unable to mount root";
+      titleEl.style.color = "#aaa";
+    }
+    const chips = this.root.querySelector<HTMLElement>(".chips");
+    if (chips) chips.style.display = "none";
+
+    this.onChaosMode?.();
   }
 
   private print(text = "", className?: string): void {
@@ -146,7 +183,7 @@ export class Terminal {
 
   private echoPromptLine(line: string): void {
     this.printHTML(
-      `<span class="prompt">${escapeHtml(PROMPT)}</span> ${escapeHtml(line)}`,
+      `<span class="prompt ${this.chaosMode ? "grub-prompt" : ""}">${escapeHtml(this.currentPrompt)}</span> ${escapeHtml(line)}`,
     );
   }
 
@@ -161,6 +198,12 @@ export class Terminal {
     this.historyIndex = this.history.length;
     this.draft = "";
 
+    // ── GRUB rescue chaos mode ──────────────────────────────────────────────
+    if (this.chaosMode) {
+      await this.handleChaosCommand(trimmed);
+      return;
+    }
+
     const [name, ...args] = trimmed.split(/\s+/);
     const command = commands.get(name.toLowerCase());
     if (!command) {
@@ -174,6 +217,42 @@ export class Terminal {
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       this.print(`error: ${message}`, "error");
+    } finally {
+      this.running = false;
+      this.scrollToBottom();
+    }
+  }
+
+  private async handleChaosCommand(cmd: string): Promise<void> {
+    this.running = true;
+    try {
+      await new Promise((r) => setTimeout(r, 120));
+
+      if (cmd === "reboot" || cmd === "reboot -f") {
+        this.print("Rebooting", "muted");
+        for (let i = 3; i >= 1; i--) {
+          await new Promise((r) => setTimeout(r, 500));
+          this.print(`  ${i}...`, "muted");
+        }
+        await new Promise((r) => setTimeout(r, 700));
+        location.reload();
+        return;
+      }
+
+      if (cmd === "exit" || cmd === "logout") {
+        this.print("lol. exit where, exactly? there's no filesystem to exit to.", "muted");
+        return;
+      }
+
+      if (cmd === "help") {
+        this.print("Available commands in rescue mode:", "muted");
+        this.print("  reboot    (the only way out)", "muted");
+        this.print("  everything else → sarcasm", "muted");
+        return;
+      }
+
+      const msg = pick(CHAOS_RESPONSES)(cmd);
+      this.print(msg, "muted");
     } finally {
       this.running = false;
       this.scrollToBottom();
@@ -214,29 +293,54 @@ export class Terminal {
 
   private autocomplete(): void {
     const value = this.input.value;
-    // Only complete the command itself (first word).
-    if (value === "" || /\s/.test(value)) return;
+    const spaceIdx = value.indexOf(" ");
 
-    const matches = [...commands.keys()].filter((name) =>
-      name.startsWith(value.toLowerCase()),
-    );
-    if (matches.length === 0) return;
-    if (matches.length === 1) {
-      this.input.value = `${matches[0]} `;
-      return;
-    }
+    if (spaceIdx === -1) {
+      if (!value) return;
+      const matches = [...commands.keys()].filter((name) =>
+        name.startsWith(value.toLowerCase()),
+      );
+      if (matches.length === 0) return;
+      if (matches.length === 1) {
+        this.input.value = matches[0] + " ";
+        return;
+      }
+      let prefix = matches[0];
+      for (const match of matches.slice(1)) {
+        while (!match.startsWith(prefix)) prefix = prefix.slice(0, -1);
+      }
+      this.input.value = prefix;
+      this.echoPromptLine(value);
+      this.print(matches.join("    "));
+    } else {
+      const cmdName = value.slice(0, spaceIdx).toLowerCase();
+      const cmd = commands.get(cmdName);
+      if (!cmd?.complete) return;
 
-    // Extend to the longest common prefix, then show the options.
-    let prefix = matches[0];
-    for (const match of matches.slice(1)) {
-      while (!match.startsWith(prefix)) prefix = prefix.slice(0, -1);
+      const afterCmd = value.slice(spaceIdx + 1);
+      const tokens   = afterCmd.split(/\s+/);
+      const partial  = tokens[tokens.length - 1] ?? "";
+      const prevTokens = tokens.slice(0, -1);
+
+      const matches = cmd.complete(partial);
+      if (matches.length === 0) return;
+
+      if (matches.length === 1) {
+        this.input.value = [cmdName, ...prevTokens, matches[0]].join(" ") + " ";
+        return;
+      }
+
+      let prefix = matches[0];
+      for (const match of matches.slice(1)) {
+        while (!match.startsWith(prefix)) prefix = prefix.slice(0, -1);
+      }
+      this.input.value = [cmdName, ...prevTokens, prefix].join(" ");
+      this.echoPromptLine(value);
+      this.print(matches.join("    "));
     }
-    this.input.value = prefix;
-    this.echoPromptLine(value);
-    this.print(matches.join("    "));
   }
 
   private scrollToBottom(): void {
-    window.scrollTo(0, document.body.scrollHeight);
+    this.root.scrollTop = this.root.scrollHeight;
   }
 }

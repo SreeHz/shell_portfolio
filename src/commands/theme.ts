@@ -24,6 +24,9 @@ export const theme: Command = {
   name: "theme",
   description: "switch color theme — try: theme dracula",
   usage: "theme [name]",
+  complete(partial) {
+    return [...THEMES].filter((t) => t.startsWith(partial.toLowerCase()));
+  },
   run(args, ctx) {
     if (args.length === 0) {
       const current = document.documentElement.dataset.theme ?? "dark";

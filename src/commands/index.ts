@@ -13,8 +13,9 @@ import { resume } from "./resume";
 import { skills } from "./skills";
 import { socials } from "./socials";
 import { theme } from "./theme";
+import { whoami, pwd, uname, date, uptime, echo, ls, neofetch } from "./unix";
+import { sudoCommand, aptCommand, rmCommand, rebootCommand } from "./jokes";
 
-// Register new commands here — one module per command.
 const list: Command[] = [
   help,
   about,
@@ -30,6 +31,18 @@ const list: Command[] = [
   theme,
   banner,
   clear,
+  whoami,
+  pwd,
+  uname,
+  date,
+  uptime,
+  echo,
+  ls,
+  neofetch,
+  sudoCommand,
+  aptCommand,
+  rmCommand,
+  rebootCommand,
 ];
 
 export const commands: ReadonlyMap<string, Command> = new Map(

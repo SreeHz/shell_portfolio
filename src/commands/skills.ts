@@ -6,14 +6,23 @@ export const skills: Command = {
   name: "skills",
   description: "what I work with",
   run(_args, ctx) {
-    const width = Math.max(...profile.skills.map((g) => g.category.length));
+    const rows = profile.skills
+      .map(
+        (g) =>
+          `<tr>
+            <td><span class="accent">${escapeHtml(g.category)}</span></td>
+            <td>${escapeHtml(g.items.join(", "))}</td>
+          </tr>`,
+      )
+      .join("");
+
     ctx.print();
-    for (const group of profile.skills) {
-      ctx.printHTML(
-        `  <span class="accent">${escapeHtml(group.category.padEnd(width + 3))}</span>` +
-          escapeHtml(group.items.join(", ")),
-      );
-    }
+    ctx.printHTML(
+      `<table class="cmd-table">
+        <thead><tr><th>Category</th><th>Skills</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>`,
+    );
     ctx.print();
   },
 };
