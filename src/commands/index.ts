@@ -2,6 +2,7 @@ import type { Command } from "../types";
 import { about } from "./about";
 import { awards } from "./awards";
 import { banner } from "./banner";
+import { blog } from "./blog";
 import { clear } from "./clear";
 import { contact } from "./contact";
 import { education } from "./education";
@@ -22,6 +23,7 @@ const list: Command[] = [
   experience,
   education,
   awards,
+  blog,
   contact,
   socials,
   resume,

@@ -62,7 +62,7 @@ export class Terminal {
     };
 
     const chips = root.querySelector<HTMLElement>(".chips")!;
-    for (const name of ["help", "about", "projects", "skills", "resume", "contact"]) {
+    for (const name of ["help", "about", "projects", "blog", "skills", "resume", "contact"]) {
       const chip = document.createElement("button");
       chip.type = "button";
       chip.textContent = name;
