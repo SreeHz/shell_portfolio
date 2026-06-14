@@ -77,29 +77,31 @@ body {
 /* Desktop icon */
 .desktop-icons {
   position: absolute;
-  top: 1.25rem;
-  left: 1.25rem;
+  inset: 0;
+  bottom: 38px;
   z-index: 10;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+  pointer-events: none;
 }
 
 .desktop-icon {
+  position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.35rem;
   padding: 0.6rem 0.5rem 0.4rem;
   border-radius: 8px;
-  cursor: pointer;
+  cursor: grab;
   user-select: none;
   width: 76px;
   border: 1px solid transparent;
   transition: background 0.15s, border-color 0.15s;
+  pointer-events: all;
+  touch-action: none;
 }
-.desktop-icon:hover  { background: rgba(255,255,255,0.08); }
-.desktop-icon.active { background: rgba(57,211,83,0.15); border-color: rgba(57,211,83,0.35); }
+.desktop-icon:hover             { background: rgba(255,255,255,0.08); }
+.desktop-icon.active            { background: rgba(57,211,83,0.15); border-color: rgba(57,211,83,0.35); }
+.desktop-icon.dragging-icon     { cursor: grabbing !important; transition: none; z-index: 15; }
 
 .icon-gfx {
   width: 44px;
@@ -323,6 +325,7 @@ a:focus-visible, .chips button:focus-visible {
   transition: background 0.15s, color 0.15s;
 }
 .tb-launcher:hover { background: rgba(255,255,255,0.1); color: #fff; }
+.tb-launcher.sm-launcher-active { background: rgba(255,255,255,0.1); color: var(--accent); }
 
 /* Taskbar window button (minimized apps) */
 .tb-win-btn {
@@ -384,6 +387,178 @@ a:focus-visible, .chips button:focus-visible {
 #tt-fulltime { font-size: 0.65rem; color: #888; margin-top: 3px; }
 
 #tb-bat-pct { font-size: 0.72rem; color: #bbb; }
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   START MENU (Application Launcher)
+   ══════════════════════════════════════════════════════════════════════════════ */
+.start-menu {
+  position: absolute;
+  bottom: 42px;
+  left: 4px;
+  width: 340px;
+  background: rgba(8, 12, 22, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  z-index: 600;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+.start-menu.sm-open {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+}
+
+.sm-search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.875rem 0.55rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.sm-search-icon { color: var(--muted); flex-shrink: 0; display: flex; }
+.sm-search-icon svg { width: 14px; height: 14px; }
+.sm-search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--fg);
+  font: inherit;
+  font-size: 0.82rem;
+  padding: 0;
+}
+.sm-search-input::placeholder { color: var(--muted); }
+
+.sm-tabs {
+  display: flex;
+  padding: 0 0.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.sm-tab {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.76rem;
+  padding: 0.4rem 0.5rem 0.45rem;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+.sm-tab:hover { color: var(--fg); }
+.sm-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+.sm-body {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+  max-height: 320px;
+  padding: 0.4rem 0.45rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--muted) transparent;
+}
+.sm-body::-webkit-scrollbar       { width: 4px; }
+.sm-body::-webkit-scrollbar-track { background: transparent; }
+.sm-body::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 2px; }
+
+.sm-app-list { display: flex; flex-direction: column; gap: 1px; }
+.sm-hidden   { display: none !important; }
+
+.sm-category-label {
+  font-size: 0.67rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  opacity: 0.7;
+  padding: 0.5rem 0.4rem 0.15rem;
+  user-select: none;
+}
+
+.sm-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.3rem 0.4rem;
+  border-radius: 6px;
+  background: transparent;
+  border: none;
+  color: var(--fg);
+  font: inherit;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: background 0.12s;
+}
+.sm-item:hover { background: rgba(255,255,255,0.06); }
+.sm-item:active { background: rgba(255,255,255,0.1); }
+
+.sm-item-icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  filter: drop-shadow(0 0 4px rgba(57,211,83,0.3));
+}
+.sm-item-icon svg { width: 18px; height: 18px; }
+
+.sm-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+.sm-item-name {
+  font-size: 0.82rem;
+  color: var(--fg);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sm-item-sub {
+  font-size: 0.67rem;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sm-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.45rem 0.7rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.sm-footer-spacer { flex: 1; }
+
+.sm-power-btn {
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
+}
+.sm-power-btn:hover { background: rgba(255,255,255,0.08); color: var(--accent); }
+.sm-power-btn svg { width: 14px; height: 14px; }
 
 /* ══════════════════════════════════════════════════════════════════════════════
    SNAP PREVIEW — ghost shown when dragging window to an edge
