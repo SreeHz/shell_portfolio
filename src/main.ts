@@ -709,3 +709,6 @@ window.addEventListener("mouseup", () => {
     termIcon.addEventListener("click", (e) => e.stopImmediatePropagation(), { once: true, capture: true });
   }
 });
+
+// ── Auto-open terminal on page load (floating, never maximized) ──────────────
+openOrSpawn();
