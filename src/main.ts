@@ -326,10 +326,34 @@ const SARCASM = [
 ];
 let sarcasmIdx = 0;
 
+const NOTIF_SOUND = "/sounds/vine-boom.mp3";
+
+function playNotifSound() {
+  const audio = new Audio(NOTIF_SOUND);
+  audio.volume = 0.6;
+  audio.play().catch(() => {
+    // Autoplay blocked or file missing — fall back to a WebAudio bonk
+    try {
+      const ctx = new AudioContext();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "square";
+      osc.frequency.setValueAtTime(220, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(110, ctx.currentTime + 0.15);
+      gain.gain.setValueAtTime(0.15, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
+      osc.connect(gain).connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.25);
+    } catch { /* no audio available at all — stay silent */ }
+  });
+}
+
 const notifContainer = document.getElementById("notif-container")!;
 
 function pushNotif() {
   const msg = SARCASM[sarcasmIdx++ % SARCASM.length];
+  playNotifSound();
 
   const item = document.createElement("div");
   item.className = "notif-item";
