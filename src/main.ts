@@ -326,7 +326,7 @@ const SARCASM = [
 ];
 let sarcasmIdx = 0;
 
-const NOTIF_SOUND = "/sounds/vine-boom.mp3";
+const NOTIF_SOUND = import.meta.env.BASE_URL + "sounds/vine-boom.mp3";
 
 function playNotifSound() {
   const audio = new Audio(NOTIF_SOUND);
@@ -351,15 +351,14 @@ function playNotifSound() {
 
 const notifContainer = document.getElementById("notif-container")!;
 
-function pushNotif() {
-  const msg = SARCASM[sarcasmIdx++ % SARCASM.length];
+function showNotif(title: string, msg: string) {
   playNotifSound();
 
   const item = document.createElement("div");
   item.className = "notif-item";
   item.innerHTML = `
     <div class="notif-hd">
-      <span class="notif-title">&#x26A0; Terminal Limit</span>
+      <span class="notif-title">${title}</span>
       <div class="notif-bar"><div class="notif-bar-fill"></div></div>
     </div>
     <div class="notif-msg">${msg}</div>`;
@@ -370,6 +369,11 @@ function pushNotif() {
 
   // Start dismiss after 5s
   setTimeout(() => dismissNotif(item), 5000);
+}
+
+function pushNotif() {
+  const msg = SARCASM[sarcasmIdx++ % SARCASM.length];
+  showNotif("&#x26A0; Terminal Limit", msg);
 }
 
 function dismissNotif(item: HTMLElement) {
@@ -530,7 +534,7 @@ const APPS: AppEntry[] = [
 ];
 
 const SM_POWER = [
-  { title: "Hibernate", icon: SM_ICONS.moon    },
+  { title: "Sleep",     icon: SM_ICONS.moon    },
   { title: "Restart",   icon: SM_ICONS.refresh },
   { title: "Shut Down", icon: SM_ICONS.power   },
   { title: "Log Out",   icon: SM_ICONS.logout  },
@@ -600,6 +604,11 @@ function buildStartMenu() {
     btn.title = title;
     btn.setAttribute("aria-label", title);
     btn.innerHTML = icon;
+    btn.addEventListener("click", () => {
+      if (APP_ACTIONS[title.toLowerCase()]) {
+        APP_ACTIONS[title.toLowerCase()]();
+      }
+    });
     footer.append(btn);
   });
 
@@ -736,3 +745,50 @@ window.addEventListener("mouseup", () => {
 
 // ── Auto-open terminal on page load (floating, never maximized) ──────────────
 openOrSpawn();
+
+// ── Lock Screen ───────────────────────────────────────────────────────────────
+const lockScreen = document.getElementById("lock-screen")!;
+const lsForm     = document.getElementById("ls-form") as HTMLFormElement;
+const lsPassword = document.getElementById("ls-password") as HTMLInputElement;
+
+const LS_SARCASM = [
+  "You literally wrote this code and you forgot it's 'password'?",
+  "Are you pretending to hack your own portfolio? It's 'password'.",
+  "Error: IQ too low to operate a fake lock screen. Hint: 'password'.",
+  "I'd lock you out permanently but there's no backend. It's 'password'.",
+  "My grandma could guess this faster. (It's 'password').",
+  "Are you typing with your elbows? Just type 'password'.",
+  "If brute force isn't working, try basic reading comprehension. 'password'.",
+  "Wow. Just... wow. The password is 'password'.",
+  "Authentication failed. Respect for yourself failed. 'password'.",
+  "I'm putting you in timeout. Just kidding, type 'password' to enter.",
+];
+let lsSarcasmIdx = 0;
+
+APP_ACTIONS["sleep"] = () => {
+  closeStartMenu();
+  lsPassword.value = "";
+  lockScreen.classList.remove("hidden");
+  lockScreen.removeAttribute("aria-hidden");
+  setTimeout(() => lsPassword.focus(), 100);
+};
+
+lsForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (lsPassword.value === "password") {
+    lockScreen.classList.add("hidden");
+    lockScreen.setAttribute("aria-hidden", "true");
+    lsPassword.value = "";
+  } else {
+    lsPassword.classList.remove("shake");
+    // Trigger reflow for animation
+    void lsPassword.offsetWidth;
+    lsPassword.classList.add("shake");
+    
+    const msg = LS_SARCASM[lsSarcasmIdx++ % LS_SARCASM.length];
+    showNotif("&#x26A0; Access Denied", msg);
+    
+    lsPassword.value = "";
+    lsPassword.focus();
+  }
+});

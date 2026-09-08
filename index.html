@@ -128,6 +128,29 @@
           </div>
         </div>
       </div>
+
+      <!-- Lock Screen Overlay -->
+      <div id="lock-screen" class="hidden" aria-hidden="true">
+        <div class="ls-container">
+          <div class="ls-avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </div>
+          <div class="ls-name">Sree Raswanth V S</div>
+          <form id="ls-form">
+            <input type="password" id="ls-password" placeholder="Password" autocomplete="off" spellcheck="false" />
+            <button type="submit" id="ls-submit" aria-label="Unlock">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </form>
+        </div>
+      </div>
+
     </div><!-- /#desktop -->
 
     <noscript>

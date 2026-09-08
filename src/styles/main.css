@@ -654,7 +654,7 @@ a:focus-visible, .chips button:focus-visible {
   bottom: calc(38px + 14px);
   right: 16px;
   width: 300px;
-  z-index: 9999;
+  z-index: 10000;
   display: flex;
   flex-direction: column;
   pointer-events: none;
@@ -762,4 +762,134 @@ body.chaos-mode #term-window.win {
   }
   .rh { display: none; }
   .line.banner { font-size: clamp(9px, 3vw, 16px); line-height: 1.25; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   LOCK SCREEN
+   ══════════════════════════════════════════════════════════════════════════════ */
+#lock-screen {
+  position: absolute;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(8, 12, 22, 0.65);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 0.3s ease, backdrop-filter 0.3s ease;
+}
+#lock-screen.hidden {
+  opacity: 0;
+  pointer-events: none;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+}
+
+.ls-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  transform: translateY(0);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+#lock-screen.hidden .ls-container {
+  transform: translateY(-20px);
+}
+
+.ls-avatar {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+  margin-bottom: 0.5rem;
+}
+.ls-avatar svg {
+  width: 50px;
+  height: 50px;
+}
+
+.ls-name {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+#ls-form {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 280px;
+  margin-top: 1rem;
+}
+
+#ls-password {
+  width: 100%;
+  padding: 0.65rem 3rem 0.65rem 1.25rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+#ls-password:focus {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(57, 211, 83, 0.2), 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+#ls-password::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+#ls-password.shake {
+  animation: ls-shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+#ls-submit {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid transparent;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+#ls-submit svg {
+  width: 16px;
+  height: 16px;
+}
+#ls-submit:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+#ls-submit:active {
+  background: var(--accent);
+  color: #000;
+}
+
+@keyframes ls-shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
 }
